@@ -2,6 +2,7 @@ import streamlit as st
 import cv2
 import numpy as np
 
+
 def main():
     st.title("🖼️ Image Recognition - What's in the Image?")
     st.write("Please upload an image.")
@@ -24,9 +25,9 @@ def main():
 
                 # VERY simple “feature extraction”
                 features = {
-                    "Red channel sum": int(np.sum(img_np[:,:,2])),
-                    "Green channel sum": int(np.sum(img_np[:,:,1])),
-                    "Blue channel sum": int(np.sum(img_np[:,:,0])),
+                    "Red channel sum": int(np.sum(img_np[:, :, 2])),
+                    "Green channel sum": int(np.sum(img_np[:, :, 1])),
+                    "Blue channel sum": int(np.sum(img_np[:, :, 0])),
                 }
 
                 st.subheader("🧠 Simple Feature Summary")

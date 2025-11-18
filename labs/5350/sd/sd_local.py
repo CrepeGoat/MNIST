@@ -4,6 +4,7 @@ from diffusers import StableDiffusionPipeline, StableDiffusionXLPipeline
 from PIL import Image
 import time
 
+
 # ---------------------------------------
 # Load Model (Cached)
 # ---------------------------------------
@@ -11,13 +12,11 @@ import time
 def load_model(model_name):
     if model_name == "Stable Diffusion 1.5":
         pipe = StableDiffusionPipeline.from_pretrained(
-            "./sd15",
-            torch_dtype=torch.float32
+            "./sd15", torch_dtype=torch.float32
         )
     else:
         pipe = StableDiffusionXLPipeline.from_pretrained(
-            "./sdxl",
-            torch_dtype=torch.float32
+            "./sdxl", torch_dtype=torch.float32
         )
 
     # Use CPU on Mac – diffusers will use Metal automatically
@@ -31,21 +30,22 @@ def load_model(model_name):
 def main():
     st.title("🎨 Local Stable Diffusion Image Generator (Offline)")
 
-    st.write("Generate images locally with Stable Diffusion running entirely on your Mac.")
+    st.write(
+        "Generate images locally with Stable Diffusion running entirely on your Mac."
+    )
 
     model_name = st.selectbox(
-        "Choose Model",
-        ["Stable Diffusion 1.5", "Stable Diffusion XL"]
+        "Choose Model", ["Stable Diffusion 1.5", "Stable Diffusion XL"]
     )
 
     prompt = st.text_area(
         "Enter your image prompt:",
-        "A friendly robot painting on a canvas in a sunny art studio, digital art"
+        "A friendly robot painting on a canvas in a sunny art studio, digital art",
     )
 
     negative_prompt = st.text_area(
         "Negative Prompt (optional)",
-        "low quality, blurry, distorted, deformed, watermark"
+        "low quality, blurry, distorted, deformed, watermark",
     )
 
     steps = st.slider("Inference Steps", 10, 60, 30)
@@ -71,7 +71,7 @@ def main():
                 guidance_scale=guidance,
                 width=width,
                 height=height,
-                generator=generator
+                generator=generator,
             ).images[0]
             end = time.time()
 
@@ -85,7 +85,7 @@ def main():
             "Download Image",
             data=image_to_bytes(image),
             file_name="output.png",
-            mime="image/png"
+            mime="image/png",
         )
 
 
@@ -94,6 +94,7 @@ def main():
 # ---------------------------------------
 def image_to_bytes(image: Image.Image):
     import io
+
     buf = io.BytesIO()
     image.save(buf, format="PNG")
     return buf.getvalue()

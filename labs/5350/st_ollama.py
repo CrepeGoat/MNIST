@@ -5,6 +5,7 @@ import asyncio
 from PIL import Image
 import io
 
+
 # -------------------------------
 # Convert PIL image -> base64 JPEG
 # -------------------------------
@@ -57,7 +58,9 @@ async def analyze_with_ollama(pil_image, model: str, prompt: str):
 def main():
     st.title("🦙 Local Vision LLM (Ollama) – What’s in this Image?")
 
-    st.write("This uses an Ollama **vision model** running locally to describe the image.")
+    st.write(
+        "This uses an Ollama **vision model** running locally to describe the image."
+    )
 
     model = st.selectbox(
         "Choose a vision-capable Ollama model",
@@ -70,8 +73,12 @@ def main():
         ],
     )
 
-    default_prompt = "Describe exactly what you see in this image. Be factual and avoid guessing."
-    user_prompt = st.text_area("Prompt sent to the model:", value=default_prompt, height=80)
+    default_prompt = (
+        "Describe exactly what you see in this image. Be factual and avoid guessing."
+    )
+    user_prompt = st.text_area(
+        "Prompt sent to the model:", value=default_prompt, height=80
+    )
 
     uploaded = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
 

@@ -3,12 +3,15 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
+
 # Load YOLOv8 once
 @st.cache_resource
 def load_model():
-    return YOLO("yolov8n.pt")   # small + fast model
+    return YOLO("yolov8n.pt")  # small + fast model
+
 
 model = load_model()
+
 
 def main():
     st.title("🖼️ Image Recognition + Object Detection")
