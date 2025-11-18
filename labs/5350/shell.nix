@@ -7,19 +7,19 @@
 pkgs.mkShell {
   buildInputs = with pkgs; [
     python312
-    # python312Packages.streamlit
-    # python312Packages.openai
+
+    # for jupyter notebook
     python312Packages.numpy
-    # python312Packages.scikitlearn
     python312Packages.matplotlib
     python312Packages.keras
-
     python312Packages.jupyterlab
-    # python312Packages.ibm-watson
-    # python312Packages.python-dotenv
-  ];
 
-  shellHook = ''
-    source venv/bin/activate
-  '';
+    # for streamlit apps
+    python312Packages.streamlit
+    python312Packages.numpy
+    python312Packages.opencv4
+    python312Packages.ultralytics
+    python312Packages.pillow
+    python312Packages.httpx
+  ];
 }
